@@ -12,23 +12,23 @@
 
 
 #   labels:
-#     app: "staging-templateapi"
+#     app: "staging-templateowner"
 
 #   hosts:
-#     - host: stag-templateapi.crytera.com
+#     - host: stag-templateowner.crytera.com
 #       paths:
 #       - path: /
 #         pathType: Prefix
 #         backend:
 #           service:
-#             name: "templateapi"
+#             name: "templateowner"
 #             port:
 #               name: http
 
 #   tls:
 #   - hosts:
-#     - stag-templateapi.crytera.com
-#     secretName: letsencrypt-nginx-templateapi
+#     - stag-templateowner.crytera.com
+#     secretName: letsencrypt-nginx-templateowner
 ############################################################################################################################
 # AWS Load Balancer
 releaseStage: staging
@@ -59,7 +59,7 @@ ingress:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/security-groups: "sg-xxxxxxxx"
     alb.ingress.kubernetes.io/listen-ports:  '[{"HTTP": 80}, {"HTTPS":443}]'
-    alb.ingress.kubernetes.io/group: templateapi-ingress
+    alb.ingress.kubernetes.io/group: templateowner-ingress
     alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:xxxxxx:xxxxxxxx:certificate/xxxxxxxx"
     alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-2-Ext-2018-06
     alb.ingress.kubernetes.io/backend-protocol: HTTP
@@ -69,16 +69,16 @@ ingress:
     alb.ingress.kubernetes.io/success-codes: "200"
 
   labels:
-    app: "templateapi"
+    app: "templateowner"
 
   hosts:
-    - host: stag-templateapi.crytera.com
+    - host: stag-templateowner.crytera.com
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: "templateapi"
+            name: "templateowner"
             port:
               name: http
 
